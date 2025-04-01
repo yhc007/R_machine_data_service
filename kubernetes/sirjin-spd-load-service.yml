@@ -1,0 +1,19 @@
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-spd-load-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  imagePullSecrets:
+    - "unomic"
+  image: unomic.registry.jetbrains.space/p/sirjin/containers/spd-load-service-prod:latest
+  envSecret:
+    secretName: "default"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "1Gi"
+      cpu: "0.25"

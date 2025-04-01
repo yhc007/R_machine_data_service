@@ -1,0 +1,19 @@
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-alarm-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  imagePullSecrets:
+    - "unomic"
+  image: unomic.registry.jetbrains.space/p/sirjin/containers/sirjin-alarm-service-prod@sha256:525206695bac17209fb26b6dfa616d6696e2b65973a778fff8b29e12d6269653
+  envSecret:
+    secretName: "default"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "1Gi"
+      cpu: "0.25"

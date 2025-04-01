@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <appender name="STDOUT" target="System.out" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+<!--            <pattern>[%date{ISO8601}] [%level] [%logger] [%X{akkaAddress}] [%marker] [%thread] - %msg%n</pattern>-->
+          <pattern>[%date{ISO8601}] [%level] [%logger] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" target="System.out" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>${application.home:-.}/logs/machine-data.log</file>
+      <append>true</append>
+
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>${application.home:-.}/logs/machine-data-%d{yyyy-MM-dd HH}.log</fileNamePattern>
+        <maxHistory>720</maxHistory>
+      </rollingPolicy>
+      <encoder>
+        <pattern>[%date{ISO8601}] [%level] [%logger] - %msg%n</pattern>
+      </encoder>
+    </appender>
+
+
+    <appender name="_FILE"  class="ch.qos.logback.classic.AsyncAppender">
+      <appender-ref ref="FILE"/>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>8192</queueSize>
+        <neverBlock>true</neverBlock>
+        <appender-ref ref="STDOUT" />
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+<!--        <appender-ref ref="_FILE"/>-->
+    </root>
+
+</configuration>

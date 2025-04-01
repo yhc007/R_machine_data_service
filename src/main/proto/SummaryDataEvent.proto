@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sirjin.machine.proto";
+
+package sirjinmachine;
+
+message SummaryDataUpdated {
+  string shopId = 1;
+  string date = 2;
+  string ncId = 3;
+  int32 quantity = 4;
+  int32 cycleTime = 5;
+  int32 inCycleTime = 6;
+  int32 waitTime = 7;
+  int32 alarmTime = 8;
+  int32 noconnTime = 9;
+  float opRate = 10;
+}
+

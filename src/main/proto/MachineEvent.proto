@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sirjin.machine.proto";
+
+package sirjinmachine;
+
+message MachineDataUpdated {
+  string ncId = 1;
+  int32 cuttingTime = 2;
+  int32 inCycleTime = 3;
+  int32 waitTime = 4;
+  int32 alarmTime = 5;
+  int32 noConnectionTime = 6;
+  string status = 7;
+  repeated Alarm alarms = 8;
+  string partNumber = 9;
+  float opRate = 10;
+  int32 path = 11;
+  int32 partCount = 12;
+  int32 totalPartCount = 13;
+  int64 timestamp = 14;
+  string toolNumber = 15;
+  string shopId = 16;
+  string lastStatus = 17;
+  int64 lastStatusTime = 18;
+  string mainPgmNm = 19;
+  float spdLd = 20;
+  string date = 21;
+}
+
+message Alarm {
+  string type = 1;
+  string alarmCode = 2;
+  string alarmMessage = 3;
+}

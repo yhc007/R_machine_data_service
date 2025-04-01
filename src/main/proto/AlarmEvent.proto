@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sirjin.machine.proto";
+
+package sirjinalarmdata;
+
+message AlarmDataUpdated {
+  string shopId = 1;
+  string ncId = 2;
+  string alarmTy = 3;
+  repeated AlarmDataSet alarmData = 4;
+}
+
+message AlarmDataSet {
+  string alarmCode = 1;
+  string alarmMessage = 2;
+}

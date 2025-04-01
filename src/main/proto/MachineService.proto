@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sirjin.machine.proto";
+import "google/protobuf/empty.proto";
+package sirjinmachine;
+
+service MachineService{
+  rpc HealthCheck(google.protobuf.Empty) returns(ResBody);
+  rpc AddRawData(RawData) returns (ResBody);
+  rpc GetCurrentMachineInfo(ReqMachineDataBody) returns (ResMachineDataBody);
+}
+
+message ResMachineDataBody {
+  string  ncId = 1;
+  int32 inCycleTime = 2;
+  int32 waitTime = 3;
+  int32 alarmTime = 4;
+  int32 noConnectionTime = 5;
+  string status = 6;
+  string partNumber = 7;
+  int32 cuttingTime = 8;
+  float opRate = 9;
+  int32 partCount = 10;
+  int32 totalPartCount = 11;
+  int64 timestamp = 12;
+  string toolNumber = 13;
+  repeated AlarmData alarms = 14;
+  string lastStatus = 15;
+  int64 lastStatusTime = 16;
+  int32 quantity = 17;
+}
+
+message ReqMachineDataBody {
+  string ncId = 1;
+}
+
+message RawData {
+  int32 shopId = 1;
+  string ncId = 2;
+  int64 timestamp = 4;
+  int32 partCount = 5;
+  int32 totalPartCount = 6;
+  string mainPgmNm = 7;
+  string status = 8;
+  string mode = 9;
+  repeated PathData pathData = 10;
+  repeated AlarmData alarms = 11;
+}
+
+message AlarmData {
+  string type = 1;
+  string alarmCode = 2;
+  string alarmMessage = 3;
+}
+
+message PathData {
+  string path = 1;
+  float spindleLoad = 2;
+  int32 spindleOverride = 3;
+  float spindleSpeed = 4;
+  int32 feedOverride = 5;
+  AuxCode auxCodes = 6;
+}
+
+message AuxCode {
+  string T = 1;
+}
+
+message ResBody{
+  string rtnMsg = 1;
+}

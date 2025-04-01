@@ -1,0 +1,19 @@
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-pgm-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  imagePullSecrets:
+    - "unomic"
+  image: unomic.registry.jetbrains.space/p/sirjin/containers/pgm-service-prod@sha256:5790b8fc7401d38e4d4e970c9daaee77d621fee74ca451183ff1a66c036d82a9
+  envSecret:
+    secretName: "default"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "1Gi"
+      cpu: "0.25"

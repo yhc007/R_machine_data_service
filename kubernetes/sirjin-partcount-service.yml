@@ -1,0 +1,19 @@
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-partcount-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  imagePullSecrets:
+    - "unomic"
+  image: unomic.registry.jetbrains.space/p/sirjin/containers/partcount-service@sha256:833fb9dea802cd49f8251a054862e8ee508caa7479b97f73dfb24222ca4e5d96
+  envSecret:
+    secretName: "default"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "2Gi"
+      cpu: "0.5"

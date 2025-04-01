@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sirjin.machine.proto";
+
+package sirjinmachine;
+
+message ProgramUpdated {
+  string shopId = 1;
+  string ncId = 2;
+  string prevProgram = 3;
+  string currentProgram = 4;
+  string programStartTime = 5;
+  string programEndTime = 6;
+  string eventType = 7;
+  string orderNumber = 8;
+  string productNumber = 9;
+  string model = 10;
+  optional bool last = 11;
+}
+

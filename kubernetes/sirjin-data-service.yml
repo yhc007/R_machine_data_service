@@ -1,0 +1,29 @@
+#apiVersion: "v1"
+#kind: "Namespace"
+#metadata:
+#  name: "shopping"
+#---
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-data-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  imagePullSecrets:
+    - "unomic"
+  image: unomic.registry.jetbrains.space/p/elfin-ap/containers/sirjin-data-service-prod:latest
+  envSecret:
+    secretName: "default"
+  httpPort: "8080"
+  httpIngress:
+    enabled: true
+    certificate: "arn:aws:acm:ap-northeast-2:942083365966:certificate/0cb6e462-7593-4c26-acc7-30c0b100d046"
+    class: "alb"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "2Gi"
+      cpu: "0.5"
