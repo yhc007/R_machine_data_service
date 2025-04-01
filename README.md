@@ -19,6 +19,7 @@
     ```
 --------------
 .env
+```
 CASSANDRA_USERNAME="cassandra"
 CASSANDRA_PASSWORD="cassandra"
 SECURE_CONNECT_DB=
@@ -38,6 +39,7 @@ QUILL_CTX_URL="postgresql://localhost:5432/sirjin?user=elfin&password=gksrkd"
 RESET_HOUR=8
 RESET_MINUTE=0
 MODE=dev
+```
 -------------
 
 # Machine Data Service
