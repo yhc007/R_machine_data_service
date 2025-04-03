@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sirjin-data-service
+  namespace: sirjin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirjin-data-service
+  template:
+    metadata:
+      labels:
+        app: sirjin-data-service
+    spec:
+      containers:
+        - name: sirjin-data-service
+          image: sirjin-data-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+            - containerPort: 2551
+          env:
+            - name: CASSANDRA_KEYSPACE
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: CASSANDRA_KEYSPACE
+            - name: CASSANDRA_HOST_UNOMIC
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: CASSANDRA_HOST_UNOMIC
+            - name: CASSANDRA_USERNAME_UNOMIC
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: CASSANDRA_USERNAME_UNOMIC
+            - name: CASSANDRA_PASSWORD_UNOMIC
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: CASSANDRA_PASSWORD_UNOMIC
+          resources:
+            limits:
+              memory: "2Gi"
+            requests:
+              memory: "1Gi"
+              cpu: "0.25" 

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sirjin-data-service
+  namespace: sirjin
+spec:
+  selector:
+    app: sirjin-data-service
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+    - name: akka-remoting
+      port: 2551
+      targetPort: 2551
+  type: ClusterIP 

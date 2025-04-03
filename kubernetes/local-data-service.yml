@@ -1,0 +1,19 @@
+apiVersion: akka.lightbend.com/v1
+kind: AkkaMicroservice
+metadata:
+  name: sirjin-data-service
+  namespace: "sirjin"
+spec:
+  replicas: 1
+  image: sirjin-data-service:latest
+  imagePullPolicy: Never  # 로컬 이미지 사용
+  envSecret:
+    secretName: "default"
+  httpPort: "8080"
+  javaOptions: "-Xlog:gc -XX:InitialRAMPercentage=75 -XX:MaxRAMPercentage=75"
+  resources:
+    limits:
+      memory: "2Gi"
+    requests:
+      memory: "1Gi"
+      cpu: "0.25" 
