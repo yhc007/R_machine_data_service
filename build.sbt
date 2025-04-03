@@ -70,3 +70,24 @@ libraryDependencies += "org.scala-lang"          % "scala-reflect" % scalaVersio
 
 dockerBaseImage  := "openjdk:11"
 dockerRepository := Some("unomic.registry.jetbrains.space/p/elfin-ap/containers")
+
+assembly / assemblyMergeStrategy := {
+  case "module-info.class" => MergeStrategy.discard
+  case PathList("META-INF", "io.netty.versions.properties") => MergeStrategy.first
+  case PathList("google", "protobuf", "struct.proto") => MergeStrategy.first
+  case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+  case PathList("META-INF", "versions", "9", "module-info.class") => MergeStrategy.discard
+  case PathList("version.conf") => MergeStrategy.concat
+  case PathList("reference.conf") => MergeStrategy.concat
+  case PathList("application.conf") => MergeStrategy.concat
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x if x.endsWith(".proto") => MergeStrategy.first
+  case x if x.endsWith(".conf") => MergeStrategy.concat
+  case x if x.matches(".*jackson.*") => MergeStrategy.first
+  case x if x.matches(".*asm.*") => MergeStrategy.first
+  case x =>
+    val oldStrategy = (assembly / assemblyMergeStrategy).value
+    oldStrategy(x)
+}
+
+assembly / assemblyJarName := "sirjin-data-service.jar"
